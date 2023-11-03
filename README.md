@@ -1,2 +1,2 @@
-# PIP_Calculator
+# Python_Calculator
 Simple Calculator

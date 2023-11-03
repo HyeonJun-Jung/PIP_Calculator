@@ -1,5 +1,5 @@
 # Python_Calculator
-PyQt based Calculator  -  Practice
+PyQt5 based Calculator  -  Practice
 
 ## Goals
 

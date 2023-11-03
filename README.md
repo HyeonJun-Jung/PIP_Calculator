@@ -1,5 +1,6 @@
 # Python_Calculator
 PyQt5 based Calculator  -  Practice
+Reference : https://studyingrabbit.tistory.com/23 
 
 ## Goals
 
@@ -10,3 +11,4 @@ PyQt5 based Calculator  -  Practice
 
 * PyQt5 모듈 설치 (phthon -m pip install pyqt5)
 * 파이썬 파일 실행 (python calculator_main.py)
+

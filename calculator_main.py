@@ -1,4 +1,5 @@
 import sys
+import math
 from PyQt5.QtWidgets import *
 
 class Main(QDialog):
@@ -14,10 +15,7 @@ class Main(QDialog):
         layout_Answer = QGridLayout()
 
         ### 수식 입력과 답 출력을 위한 LineEdit 위젯 생성
-        label_equation = QLabel("Equation: ")
-        label_solution = QLabel("Solution: ")
         self.equation = QLineEdit("")
-        self.solution = QLineEdit("")
         self.answer = QLineEdit("")
 
         ### Layout_Answer에 LineEdit 추가
@@ -49,6 +47,14 @@ class Main(QDialog):
         button_Square = QPushButton("x^2")
         button_SquareRoot = QPushButton("x^(1/2)")
 
+        ### %, CE, C, 1/x, x^2, x^(1/2) 버튼에 기능 추가
+        button_mod.clicked.connect(lambda state, operation = "%": self.button_operation_clicked(operation))
+        button_CE.clicked.connect(self.button_clear_clicked)
+        button_C.clicked.connect(self.button_clear_clicked)
+        button_reciprocal.clicked.connect(self.button_reciprocal_clicked)
+        button_Square.clicked.connect(self.button_square_clicked)
+        button_SquareRoot.clicked.connect(self.button_squareRoot_clicked)
+
         ### %, CE, C, 1/x, x^2, x^(1/2) 버튼 을 layout_operation_number 레이아웃에 추가
         layout_operation_number.addWidget(button_mod, 0, 0)
         layout_operation_number.addWidget(button_CE, 0, 1)
@@ -59,12 +65,10 @@ class Main(QDialog):
 
         ### =, clear, backspace 버튼 생성
         button_equal = QPushButton("=")
-        button_clear = QPushButton("Clear")
         button_backspace = QPushButton("Backspace")
 
         ### =, clear, backspace 버튼 클릭 시 시그널 설정
         button_equal.clicked.connect(self.button_equal_clicked)
-        button_clear.clicked.connect(self.button_clear_clicked)
         button_backspace.clicked.connect(self.button_backspace_clicked)
 
         # BackSpace와 Equal을 Layout에 추가
@@ -125,12 +129,33 @@ class Main(QDialog):
 
     def button_clear_clicked(self):
         self.equation.setText("")
-        self.solution.setText("")
+        self.answer.setText("")
 
     def button_backspace_clicked(self):
         equation = self.equation.text()
         equation = equation[:-1]
         self.equation.setText(equation)
+        answer = self.answer.text()
+        answer = answer[:-1]
+        self.answer.setText(answer)
+
+    def button_square_clicked(self):
+        equation = float(self.answer.text())
+        equation = math.pow(equation, 2)
+        self.equation.setText(str(equation))
+        self.answer.setText(str(equation))
+
+    def button_squareRoot_clicked(self):
+        equation = float(self.answer.text())
+        equation = math.sqrt(equation)
+        self.equation.setText(str(equation))
+        self.answer.setText(str(equation))
+
+    def button_reciprocal_clicked(self):
+        equation = float(self.answer.text())
+        equation = 1/equation
+        self.equation.setText(str(equation))
+        self.answer.setText(str(equation))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
